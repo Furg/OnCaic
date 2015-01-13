@@ -3,6 +3,7 @@ package cat.udl.eps.softarch.hello.controller;
 import java.util.Date;
 import cat.udl.eps.softarch.hello.model.Greeting;
 import cat.udl.eps.softarch.hello.repository.GreetingRepository;
+import cat.udl.eps.softarch.hello.utils.XQueryHelper;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +40,9 @@ public class GreetingController {
     @RequestMapping(method=RequestMethod.GET, produces="text/html")
     public ModelAndView listHTML(@RequestParam(required=false, defaultValue="0") int page,
                                  @RequestParam(required=false, defaultValue="10") int size) {
-        return new ModelAndView("greetings", "greetings", list(page, size));
+
+        //return new ModelAndView("greetings", "greetings", list(page, size));
+        return new ModelAndView("greetings", "greetings", XQueryHelper.intent1());
     }
 
 // RETRIEVE

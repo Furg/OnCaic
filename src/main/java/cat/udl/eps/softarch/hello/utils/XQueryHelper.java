@@ -25,27 +25,41 @@ public class XQueryHelper {
     private JAXBContext          jaxbContext;
     private Unmarshaller         jaxbUnmarshaller;
 
-    static final String apiURL   = "http://aba8.hol.es/RTCBI_ST-TO5.xml";
+    static final String apiURL   = "http://aba8.hol.es/RTCBI_ST-TO5_curt.xml";
     static final String hostingsXQ =
-              "for $r in $doc//objRegistral\n"
+             "declare variable $doc external;\n"
+            +"for $r in $doc//objRegistral\n"
             + "return\n"
-            + "<hosting>\n"
+            + "<hostingXML>\n"
             + "<name>{$r//retol/text()}</name>\n"
             + "<email>{$r//email/text()}</email>\n"
             + "<utm_x>{$r//utm_x/text()}</utm_x>\n"
             + "<utm_y>{$r//utm_y/text()}</utm_y>\n"
-            + "</hosting>";
+            + "</hostingXML>";
 
     @XmlRootElement
-    private static class HostingXML {
+    public static class HostingXML {
         @XmlElement String name;
         @XmlElement String email;
         @XmlElement String utm_x;
         @XmlElement String utm_y;
+        double[] latlong;
 
         @Override
         public String toString() {
-            return "Name: "+name+"\n"+"Email: "+email+"\n"+"UTM X: "+utm_x+"\n"+"UTM Y: "+utm_y+"\n";
+            return "Name: "+name+"\n"+"Email: "+email+"\n"+"UTM X: "+utm_x+"\n"+"UTM Y: "+utm_y+"\n"+"Lat: "+latlong[0]+"\n"+"Long: "+latlong[1]+"\n";
+        }
+
+        public String getName(){
+            return name;
+        }
+
+        public double[] getLatlong(){
+            return latlong;
+        }
+
+        public String getEmail(){
+            return email;
         }
     }
 
@@ -69,6 +83,8 @@ public class XQueryHelper {
             while (rs.next()) {
                 XQItem item = rs.getItem();
                 HostingXML hostingXML = (HostingXML) jaxbUnmarshaller.unmarshal(item.getNode());
+                CoordinateConversion coord = new CoordinateConversion();
+                hostingXML.latlong = coord.utm2LatLon("31 31 "+hostingXML.utm_x+" "+hostingXML.utm_y);
                 hostingsXML.add(hostingXML);
             }
         }
@@ -88,14 +104,17 @@ public class XQueryHelper {
         }
     }
 
-    public static void intent1() {
+    public static ArrayList<HostingXML> intent1() {
         try {
             XQueryHelper xQueryHelper = new XQueryHelper(hostingsXQ, new URL(apiURL));
             ArrayList<HostingXML> hostingsXML = xQueryHelper.getHostingXML();
-            for (HostingXML hostingXML : hostingsXML)
+            for (HostingXML hostingXML : hostingsXML) {
                 System.out.println(hostingXML);
+            }
+            return hostingsXML;
         } catch (Exception e){
             e.printStackTrace();
+            return new ArrayList<HostingXML>();
         }
     }
 
