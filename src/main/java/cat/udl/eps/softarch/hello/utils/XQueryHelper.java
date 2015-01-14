@@ -33,6 +33,15 @@ public class XQueryHelper {
             + "<hostingXML>\n"
             + "<name>{$r//retol/text()}</name>\n"
             + "<email>{$r//email/text()}</email>\n"
+            + "<tipus>{$r//tipus/text()}</tipus>\n"
+            + "<web>{$r//web/text()}</web>\n"
+            + "<carrer>{$r//dades_generals/adreca/tipus_via/text(),\" \",$r//dades_generals/adreca/nom_via/text(),\" \",$r//dades_generals/adreca/num/text()}</carrer>\n"
+            + "<cp>{$r//dades_generals/adreca/cp/text()}</cp>\n"
+            + "<municipi>{$r//dades_generals/adreca/municipi/text()}</municipi>\n"
+            + "<comarca>{$r//dades_generals/adreca/comarca/text()}</comarca>\n"
+            + "<provincia>{$r//dades_generals/adreca/provincia/text()}</provincia>\n"
+            + "<telefon>{$r//dades_generals/telefons/telefon[1]/text()}</telefon>\n"
+            + "<nom_t>{$r//titular/nom_titular/text(),\" \",$r//titular/cognoms_titular/text()}</nom_t>\n"
             + "<utm_x>{$r//utm_x/text()}</utm_x>\n"
             + "<utm_y>{$r//utm_y/text()}</utm_y>\n"
             + "</hostingXML>";
@@ -41,6 +50,15 @@ public class XQueryHelper {
     public static class HostingXML {
         @XmlElement String name;
         @XmlElement String email;
+        @XmlElement String tipus;
+        @XmlElement String web;
+        @XmlElement String carrer;
+        @XmlElement String cp;
+        @XmlElement String municipi;
+        @XmlElement String comarca;
+        @XmlElement String provincia;
+        @XmlElement String telefon;
+        @XmlElement String nom_t;
         @XmlElement String utm_x;
         @XmlElement String utm_y;
         double[] latlong;
@@ -60,6 +78,42 @@ public class XQueryHelper {
 
         public String getEmail(){
             return email;
+        }
+
+        public String getTipus() {
+            return tipus;
+        }
+
+        public String getWeb() {
+            return web;
+        }
+
+        public String getCarrer() {
+            return carrer;
+        }
+
+        public String getCp() {
+            return cp;
+        }
+
+        public String getMunicipi() {
+            return municipi;
+        }
+
+        public String getComarca() {
+            return comarca;
+        }
+
+        public String getProvincia() {
+            return provincia;
+        }
+
+        public String getTelefon() {
+            return telefon;
+        }
+
+        public String getNom_t() {
+            return nom_t;
         }
     }
 
