@@ -1,6 +1,7 @@
 package cat.udl.eps.softarch.hello.utils;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.xquery.*;
+import cat.udl.eps.softarch.hello.model.Hosting;
 
 /**
  * Created by http://rhizomik.net/~roberto/
@@ -158,10 +160,11 @@ public class XQueryHelper {
         }
     }
 
-    public static ArrayList<HostingXML> intent1() {
+    public static ArrayList<HostingXML> getDTO() {
         try {
             XQueryHelper xQueryHelper = new XQueryHelper(hostingsXQ, new URL(apiURL));
             ArrayList<HostingXML> hostingsXML = xQueryHelper.getHostingXML();
+
             for (HostingXML hostingXML : hostingsXML) {
                 System.out.println(hostingXML);
             }
@@ -171,6 +174,19 @@ public class XQueryHelper {
             return new ArrayList<HostingXML>();
         }
     }
+
+    public static ArrayList<Hosting> getHostings(){
+        ArrayList<Hosting> hostings = new ArrayList<Hosting>();
+        for(HostingXML h: getDTO()){
+            Hosting host = new Hosting(h.getName(),h.getEmail(),h.getTipus(),h.getWeb(),h.getCarrer(),h.getCp(),
+                                       h.getMunicipi(),h.getComarca(),h.getProvincia(),h.getTelefon(),h.getNom_t(),
+                                       String.valueOf(h.getLatlong()[0]),String.valueOf(h.getLatlong()[1]));
+            hostings.add(host);
+        }
+        return hostings;
+    }
+
+
 
     public static void main(String[] args) {
         try {
