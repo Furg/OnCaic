@@ -30,51 +30,39 @@ public class Hosting {
     @Size(max = 256, message = "Name maximum length is {max} characters long")
     private String name;
 
-    @NotBlank(message = "Email cannot be blank")
     @Email(message = "E-mail should be valid")
     private String email;
 
-    @NotBlank(message = "type cannot be blank")
     @Size(max = 256, message = "type maximum length is {max} characters long")
     private String type;
 
-    @NotBlank(message = "Web cannot be blank")
     @Size(max = 256, message = "Web maximum length is {max} characters long")
     private String web;
 
-    @NotBlank(message = "Street cannot be blank")
     @Size(max = 256, message = "Street maximum length is {max} characters long")
     private String street;
 
-    @NotBlank(message = "Postalcode cannot be blank")
     @Size(max = 256, message = "Postalcode maximum length is {max} characters long")
     private String postalcode;
 
-    @NotBlank(message = "City cannot be blank")
     @Size(max = 256, message = "City maximum length is {max} characters long")
     private String city;
 
-    @NotBlank(message = "Region cannot be blank")
     @Size(max = 256, message = "Region maximum length is {max} characters long")
     private String region;
 
-    @NotBlank(message = "Province cannot be blank")
     @Size(max = 256, message = "Region maximum length is {max} characters long")
     private String province;
 
-    @NotBlank(message = "Phonenumber cannot be blank")
     @Size(max = 256, message = "Phonenumber maximum length is {max} characters long")
     private String phonenumber;
 
-    @NotBlank(message = "Owner cannot be blank")
     @Size(max = 256, message = "Owner maximum length is {max} characters long")
     private String owner;
 
-    @NotBlank(message = "Latitude cannot be blank")
     @Size(max = 256, message = "Latitude maximum length is {max} characters long")
     private String latitude;
 
-    @NotBlank(message = "Longitude cannot be blank")
     @Size(max = 256, message = "Longitude maximum length is {max} characters long")
     private String longitude;
 
@@ -95,7 +83,7 @@ public class Hosting {
         this.owner = owner;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.urlname = name.replaceAll("[^A-Za-z]+", "");
+        this.urlname = name.replaceAll("[^A-Za-z0-9]+", "");
     }
 
     public String getName() { return name; }

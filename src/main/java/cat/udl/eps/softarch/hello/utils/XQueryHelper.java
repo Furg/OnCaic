@@ -67,7 +67,7 @@ public class XQueryHelper {
 
         @Override
         public String toString() {
-            return "Name: "+name+"\n"+"Email: "+email+"\n"+"UTM X: "+utm_x+"\n"+"UTM Y: "+utm_y+"\n"+"Lat: "+latlong[0]+"\n"+"Long: "+latlong[1]+"\n";
+            return "Name: "+name+"\n"+"Email: "+email +"\n"+"Tipus: "+tipus+"\n"+"Web: "+web +"\n"+"Carrer: "+carrer +"\n"+"Municipi: "+municipi +"\n"+"Comarca: "+comarca +"\n"+"Provincia: "+provincia +"\n"+"CP: "+cp +"\n"+"Owner: "+nom_t +"\n"+"Telefon: "+telefon +"\n"+"UTM X: "+utm_x+"\n"+"UTM Y: "+utm_y+"\n"+"Lat: "+latlong[0]+"\n"+"Long: "+latlong[1]+"\n";
         }
 
         public String getName(){
