@@ -5,9 +5,9 @@
 <body>
 <h2>Hostings List</h2>
 <ul>
-    <c:if test="${not empty greetings}">
-        <c:forEach var="greeting" items="${greetings}">
-            <li><a href="/hostings/${greeting.getUrlname()}">${greeting.getName()}</a>: ${greeting.getWeb()}</li>
+    <c:if test="${not empty hostings}">
+        <c:forEach var="hosting" items="${hostings}">
+            <li><a href="/hostings/${hosting.getUrlname()}">${hosting.getName()}</a></li>
         </c:forEach>
     </c:if>
 </ul>

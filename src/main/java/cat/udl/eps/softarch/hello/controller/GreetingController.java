@@ -1,5 +1,6 @@
 package cat.udl.eps.softarch.hello.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import cat.udl.eps.softarch.hello.model.Greeting;
 import cat.udl.eps.softarch.hello.model.Hosting;
@@ -36,9 +37,11 @@ public class GreetingController {
     public ModelAndView loaddbHTML(@RequestParam(required=false, defaultValue="0") int page,
                                  @RequestParam(required=false, defaultValue="10") int size) {
 
+        ArrayList<Hosting> hostings = XQueryHelper.getHostings();
         hostingRepository.save(XQueryHelper.getHostings());
 
-        return new ModelAndView("greetings");
+
+        return new ModelAndView("loaddb", "hostings", hostings);
     }
 
 // LIST
@@ -53,7 +56,7 @@ public class GreetingController {
     @RequestMapping(value = "/hostings", method=RequestMethod.GET, produces="text/html")
     public ModelAndView listHTML(@RequestParam(required=false, defaultValue="0") int page,
                                  @RequestParam(required=false, defaultValue="10") int size) {
-        return new ModelAndView("greetings", "greetings", list(page, size));
+        return new ModelAndView("hostings", "hostings", list(page, size));
     }
 
 
@@ -67,7 +70,7 @@ public class GreetingController {
     }
     @RequestMapping(value = "/hostings/{urlname}", method = RequestMethod.GET, produces = "text/html")
     public ModelAndView retrieveHTML(@PathVariable( "urlname" ) String urlname) {
-        return new ModelAndView("greeting", "greeting", retrieve(urlname));
+        return new ModelAndView("hosting", "hosting", retrieve(urlname));
     }
 
 

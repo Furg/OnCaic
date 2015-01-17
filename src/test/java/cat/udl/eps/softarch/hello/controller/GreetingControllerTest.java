@@ -61,7 +61,7 @@ public class GreetingControllerTest {
         mockMvc.perform(get("/greetings").accept(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
                 .andExpect(view().name("greetings"))
-                .andExpect(forwardedUrl("/WEB-INF/views/greetings.jsp"))
+                .andExpect(forwardedUrl("/WEB-INF/views/hostings.jsp"))
                 .andExpect(model().attributeExists("greetings"))
                 .andExpect(model().attribute("greetings", hasSize(startSize)))
                 .andExpect(model().attribute("greetings", hasItem( allOf(
@@ -74,7 +74,7 @@ public class GreetingControllerTest {
         mockMvc.perform(get("/greetings/{id}", 1L).accept(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
                 .andExpect(view().name("greeting"))
-                .andExpect(forwardedUrl("/WEB-INF/views/greeting.jsp"))
+                .andExpect(forwardedUrl("/WEB-INF/views/hosting.jsp"))
                 .andExpect(model().attributeExists("greeting"))
                 .andExpect(model().attribute("greeting", allOf(
                         hasProperty("id", is(1L)),
